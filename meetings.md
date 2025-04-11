@@ -2,5 +2,10 @@
 ### 4/11/2025 12:30pm - 1:30pm
 - Frances and Dom attended
 - Updates:
-  - <Frances> I set up the repo with foundational documents, slightly edited README, 
-    
+  - <Frances> 
+    - I set up the repo with foundational documents, slightly edited README, and created my seperate branch called "frances-branch." 
+    - Next I'll work on my half of the requirements.
+  - <Dom>
+  - Pair-programming/group-progress:
+    - We worked on setting up our work flow by having our local environments match GitHub repo and branches.    
+    - We also talked about how to split up the work and how often we want to meet. 
