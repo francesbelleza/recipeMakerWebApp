@@ -1,20 +1,22 @@
-## <remove all of the example text and notes in < > such as this one>
+
 
 ## Functional Requirements
-1. requirement <should be 1 sentence that describes requirement>
-2. requirement
-3. requirement
-4. requirement
-5. requirement
-6. requirement
-7. requirement
-8. requirement
-9. requirement
-10. requirement
-11. requirement
-12. requirement
-13. requirement
-14. requirement
+1. User Registration:
+2. User Login:
+3. User Logout:
+4. Create Recipe:
+5. Edit Recipe:
+6. Delete Recipe:
+7. View Recipe:
+8. Search Recipe:
+9. Rate:
+10. Comment:
+11. View User Profile:
+12. Edit User Profile:
+13. Save Recipe:
+14. View All Recipes:
+15. Filter Recipes:
+
 
 <using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
 
