@@ -1,21 +1,21 @@
 
 
 ## Functional Requirements
-1. User Registration:
-2. User Login:
-3. User Logout:
-4. Create Recipe:
-5. Edit Recipe:
-6. Delete Recipe:
-7. View Recipe:
-8. Search Recipe:
-9. Rate:
-10. Comment:
-11. View User Profile:
-12. Edit User Profile:
-13. Save Recipe:
-14. View All Recipes:
-15. Filter Recipes:
+1. User Registration: Allows use to create an account by giving a username, password, and email.
+2. User Login: Users may able to log in using their registered account.
+3. User Logout: Users can log out of their account safely.
+4. Create Recipe: Users may able to create recipes by giving a title, description, and instructions. 
+5. Edit Recipe: Users may update an existing recipe.
+6. Delete Recipe: Users may delete their own recipes.
+7. View Recipe: Everyone may able to see the details of the recipe such as the ingredients and instructions. 
+8. Search Recipe: Users may search recipes by title or ingredients.
+9. Rate: Users may give 1-5 stars of a recipe. 
+10. Comment: Users may able to leave a comment to a recipe. 
+11. View User Profile: Users can see their own profile and their recipes. 
+12. Edit User Profile: Users may change their display name, email, and password. 
+13. Save Recipe: Users may save recipes for a quick access. 
+14. View All Recipes: Main recipe lists shows all recipes available in the database. 
+15. Filter Recipes: Users may filter recipes by tags such as 'vegan', 'dessert', etc.
 
 
 <using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
