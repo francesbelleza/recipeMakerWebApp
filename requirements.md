@@ -1,5 +1,3 @@
-
-
 ## Functional Requirements
 1. **User Registration:** Allows use to create an account by giving a username, password, and email.
 2. **User Login:** Users may able to log in using their registered account.
@@ -17,12 +15,11 @@
 14. **View All Recipes:** Main recipe lists shows all recipes available in the database. 
 15. **Filter Recipes:** Users may filter recipes by tags such as 'vegan', 'dessert', etc.
 
-
 <using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
 
 ## Non-functional Requirements
-1. non-functional
-2. non-functional
+1. The program runs on web browsers (Chrome, Safari, etc.)
+2. The program implements SQLAlchemy for data scalability.
 
 <each of the 14 requirements will have a use case associated with it>
 ## Use Cases <Add name of who will write (this specific requirement) and implement (in subsequent milestones) the use case below>
@@ -47,7 +44,79 @@ describe multiple issues that may arise and their outcomes>
 2. Ut enim ad minim veniam, quis nostrum e
 3. ...
 - **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
-
 1. Ut enim ad minim veniam, quis nostrum e
 2. Ut enim ad minim veniam, quis nostrum e
 3. ...
+
+## User Registration <Dom>
+## User login <Dom>
+## User logout <Dom>
+## Create recipe <Dom> 
+## Edit Recipe <Dom>
+## Delete Recipe <Dom>
+## View Recipe <Dom>
+## Search Recipe<Dom>
+
+
+## Rate <Frances>
+- **Pre-condition:** Users must be logged into their accounts in order to 
+access this.
+- **Trigger:** Users click on the "rate" button found on specific recipe's page.
+- **Primary Sequence:**
+1. User clicks on the "rate" button found on the recipe's page.
+2. User is redirected by system to a different page, rating form page.
+3. User enters rating of recipe.
+4. User submits rating.
+5. The system saves the rating into the database.
+- **Primary Post-conditions:** When the user completes their rating they're redirected
+to the original recipe they were looking at. The rating of specific recipe updates.
+- **Alternate Sequence:** 
+1. User is not logged into their account.
+2. The system will prompt that they're not logged in.
+3. The system will have a button to login.
+
+## Comment <Frances>
+- **Pre-condition:** Users must be logged onto their accounts to use
+this feature.
+- **Trigger:** They press the comment button underneath the comment text box.
+- **Primary Sequence:**
+1. User scrolls down to the "comments" section, specifically to the text box 
+underneath all the comments.
+2. User types in a comment.
+3. User presses the "comment" button.
+4. The system saves the comment into the database.
+- **Primary Post-conditions:** The comment is now visible under the "comments" section.
+The comments at the top are most recent.
+- **Alternate Sequence:** 
+1. User is not logged into their account.
+2. The system will redirect user to an error page "You are not logged in."
+3. In the page will be a button "log in"
+
+## View User Profile <Frances>
+- **Pre-condition:** Users must be logged into their accounts in order
+to access this feature.
+- **Trigger:** User clicks the "view profile" button.
+- **Primary Sequence:**
+1. User clicks "view profile" button.
+2. User is redirected to their profile.
+3. Users click the "edit profile" button underneath their information.
+4. The system redirects users to an editable form where their information
+   (display name, password, email) exists.
+5. User changes any information they'd like.
+6. User presses the "save" button.
+- **Primary Post-conditions:** The system redirects user to a "successfully 
+- saved" page, and also redirects them to their profile.
+- **Alternate Sequence:** 
+1. The system is unable to load their information.
+2. System prompts user to refresh the page.
+
+## Edit User Profile <Frances>
+- **Pre-condition:** 
+- **Trigger:** 
+- **Primary Sequence:**
+- **Primary Post-conditions:** 
+- **Alternate Sequence:** 
+- 
+## Save Recipe <Frances>
+## View All Recipes <Frances>
+## Filter Recipes <Frances>
