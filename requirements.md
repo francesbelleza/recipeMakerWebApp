@@ -15,13 +15,10 @@
 14. **View All Recipes:** Main recipe lists shows all recipes available in the database. 
 15. **Filter Recipes:** Users may filter recipes by tags such as 'vegan', 'dessert', etc.
 
-<using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
-
 ## Non-functional Requirements
 1. The program runs on web browsers (Chrome, Safari, etc.)
 2. The program implements SQLAlchemy for data scalability.
 
-<each of the 14 requirements will have a use case associated with it>
 ## Use Cases <Add name of who will write (this specific requirement) and implement (in subsequent milestones) the use case below>
 1. Use Case Name (Should match functional requirement name)
 - **Pre-condition:** <can be a list or short description>
@@ -97,26 +94,51 @@ The comments at the top are most recent.
 to access this feature.
 - **Trigger:** User clicks the "view profile" button.
 - **Primary Sequence:**
-1. User clicks "view profile" button.
-2. User is redirected to their profile.
-3. Users click the "edit profile" button underneath their information.
-4. The system redirects users to an editable form where their information
-   (display name, password, email) exists.
-5. User changes any information they'd like.
-6. User presses the "save" button.
-- **Primary Post-conditions:** The system redirects user to a "successfully 
-- saved" page, and also redirects them to their profile.
+1. User clicks the "view profile" button.
+2. System redirects user to their profile.
+3. User is able to see their profile information.
+4. User can click the toggle button "submitted recipes" to view their submitted recipes.
+- **Primary Post-conditions:** User is able to view their profile.
 - **Alternate Sequence:** 
 1. The system is unable to load their information.
 2. System prompts user to refresh the page.
 
 ## Edit User Profile <Frances>
+- **Pre-condition:** User must be logged into their account to access this feature.
+- **Trigger:** User clicks 
+- **Primary Sequence:**
+1. User clicks "view profile" button.
+2. System redirects user to their profile.
+3. Users click the "edit profile" button underneath their information.
+4. The system redirects users to an editable form where their information
+   (display name, password, email) exists.
+5. User changes any information they'd like.
+6. User presses the "save" button.
+- **Primary Post-conditions:** The system redirects user to a "successfully saved" page, 
+and also redirects them to their profile.
+- **Alternate Sequence:** 
+1. The system was unable to save their changed information.
+2. System prompts them to refresh the page and start the edit process again.
+
+## Save Recipe (Favorite) <Frances>
+- **Pre-condition:** User must be logged into their accounts and viewing a specific recipe.
+- **Trigger:** User clicks the heart icon at a specific recipe.
+- **Primary Sequence:**
+1. User finds a recipe they like; they're viewing that recipe on its specific page.
+2. User clicks the heart icon located next to the recipes name.
+3. The system will show a pop-up with the question, "Would you like to save this to your
+favorites list?"
+4. User will respond yes to save and no to cancel.
+- **Primary Post-conditions:** If user clicks yes, the system will respond with a success page: "recipe added to your favorites list."
+- **Alternate Sequence:** 
+1. System was unable to save recipe to user's favorites list.
+2. The system will prompt the user to refresh and try again.
+
+## View All Recipes <Frances>
 - **Pre-condition:** 
 - **Trigger:** 
 - **Primary Sequence:**
 - **Primary Post-conditions:** 
-- **Alternate Sequence:** 
+- **Alternate Sequence:**
 - 
-## Save Recipe <Frances>
-## View All Recipes <Frances>
 ## Filter Recipes <Frances>
