@@ -15,13 +15,10 @@
 14. **View All Recipes:** Main recipe lists shows all recipes available in the database. 
 15. **Filter Recipes:** Users may filter recipes by tags such as 'vegan', 'dessert', etc.
 
-<using the syntax [](images/ui1.png) add images in a folder called images/ and place sketches of your webpages>
-
 ## Non-functional Requirements
 1. The program runs on web browsers (Chrome, Safari, etc.)
 2. The program implements SQLAlchemy for data scalability.
 
-<each of the 14 requirements will have a use case associated with it>
 ## Use Cases <Add name of who will write (this specific requirement) and implement (in subsequent milestones) the use case below>
 1. Use Case Name (Should match functional requirement name)
 - **Pre-condition:** <can be a list or short description>
