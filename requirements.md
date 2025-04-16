@@ -77,62 +77,62 @@ to the original recipe they were looking at. The rating of specific recipe updat
 this feature.
 - **Trigger:** They press the comment button underneath the comment text box.
 - **Primary Sequence:**
-1. User scrolls down to the "comments" section, specifically to the text box 
-underneath all the comments.
-2. User types in a comment.
-3. User presses the "comment" button.
-4. The system saves the comment into the database.
+  1. User scrolls down to the "comments" section, specifically to the text box 
+  underneath all the comments.
+  2. User types in a comment.
+  3. User presses the "comment" button.
+  4. The system saves the comment into the database.
 - **Primary Post-conditions:** The comment is now visible under the "comments" section.
 The comments at the top are most recent.
 - **Alternate Sequence:** 
-1. User is not logged into their account.
-2. The system will redirect user to an error page "You are not logged in."
-3. In the page will be a button "log in"
+  1. User is not logged into their account.
+  2. The system will redirect user to an error page "You are not logged in."
+  3. In the page will be a button "log in"
 
 ## View User Profile <Frances>
 - **Pre-condition:** Users must be logged into their accounts in order
 to access this feature.
 - **Trigger:** User clicks the "view profile" button.
 - **Primary Sequence:**
-1. User clicks the "view profile" button.
-2. System redirects user to their profile.
-3. User is able to see their profile information.
-4. User can click the toggle button "submitted recipes" to view their submitted recipes.
-- **Primary Post-conditions:** User is able to view their profile.
+  1. User clicks the "view profile" button.
+  2. System redirects user to their profile.
+  3. User is able to see their profile information.
+  4. User can click the toggle button "submitted recipes" to view their submitted recipes.
+  - **Primary Post-conditions:** User is able to view their profile.
 - **Alternate Sequence:** 
-1. The system is unable to load their information.
-2. System prompts user to refresh the page.
+  1. The system is unable to load their information.
+  2. System prompts user to refresh the page.
 
 ## Edit User Profile <Frances>
 - **Pre-condition:** User must be logged into their account to access this feature.
 - **Trigger:** User clicks 
 - **Primary Sequence:**
-1. User clicks "view profile" button.
-2. System redirects user to their profile.
-3. Users click the "edit profile" button underneath their information.
-4. The system redirects users to an editable form where their information
-   (display name, password, email) exists.
-5. User changes any information they'd like.
-6. User presses the "save" button.
+  1. User clicks "view profile" button.
+  2. System redirects user to their profile.
+  3. Users click the "edit profile" button underneath their information.
+  4. The system redirects users to an editable form where their information
+     (display name, password, email) exists.
+  5. User changes any information they'd like.
+  6. User presses the "save" button.
 - **Primary Post-conditions:** The system redirects user to a "successfully saved" page, 
 and also redirects them to their profile.
 - **Alternate Sequence:** 
-1. The system was unable to save their changed information.
-2. System prompts them to refresh the page and start the edit process again.
+  1. The system was unable to save their changed information.
+  2. System prompts them to refresh the page and start the edit process again.
 
 ## Save Recipe (Favorite) <Frances>
 - **Pre-condition:** User must be logged into their accounts and viewing a specific recipe.
 - **Trigger:** User clicks the heart icon at a specific recipe.
 - **Primary Sequence:**
-1. User finds a recipe they like; they're viewing that recipe on its specific page.
-2. User clicks the heart icon located next to the recipes name.
-3. The system will show a pop-up with the question, "Would you like to save this to your
-favorites list?"
-4. User will respond yes to save and no to cancel.
+  1. User finds a recipe they like; they're viewing that recipe on its specific page.
+  2. User clicks the heart icon located next to the recipes name.
+  3. The system will show a pop-up with the question, "Would you like to save this to your
+  favorites list?"
+  4. User will respond yes to save and no to cancel.
 - **Primary Post-conditions:** If user clicks yes, the system will respond with a success page: "recipe added to your favorites list."
 - **Alternate Sequence:** 
-1. System was unable to save recipe to user's favorites list.
-2. The system will prompt the user to refresh and try again.
+  1. System was unable to save recipe to user's favorites list.
+  2. The system will prompt the user to refresh and try again.
 
 ## View All Recipes <Frances>
 - **Pre-condition:** 
