@@ -46,13 +46,53 @@ describe multiple issues that may arise and their outcomes>
 3. ...
 
 ## User Registration <Dom>
+- **Pre-condition:** 
+- **Trigger:**
+- **Primary Sequence:**
+- **Primary Post-conditions:**
+- **Alternate Sequence:**
 ## User login <Dom>
+- **Pre-condition:** 
+- **Trigger:**
+- **Primary Sequence:**
+- **Primary Post-conditions:**
+- **Alternate Sequence:**
 ## User logout <Dom>
+- **Pre-condition:** 
+- **Trigger:**
+- **Primary Sequence:**
+- **Primary Post-conditions:**
+- **Alternate Sequence:**
 ## Create recipe <Dom> 
+- **Pre-condition:** 
+- **Trigger:**
+- **Primary Sequence:**
+- **Primary Post-conditions:**
+- **Alternate Sequence:**
 ## Edit Recipe <Dom>
+- **Pre-condition:** 
+- **Trigger:**
+- **Primary Sequence:**
+- **Primary Post-conditions:**
+- **Alternate Sequence:**
 ## Delete Recipe <Dom>
+- **Pre-condition:** 
+- **Trigger:**
+- **Primary Sequence:**
+- **Primary Post-conditions:**
+- **Alternate Sequence:**
 ## View Recipe <Dom>
+- **Pre-condition:** 
+- **Trigger:**
+- **Primary Sequence:**
+- **Primary Post-conditions:**
+- **Alternate Sequence:**
 ## Search Recipe<Dom>
+- **Pre-condition:** 
+- **Trigger:**
+- **Primary Sequence:**
+- **Primary Post-conditions:**
+- **Alternate Sequence:**
 
 
 ## Rate <Frances>
