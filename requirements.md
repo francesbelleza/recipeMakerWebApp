@@ -98,7 +98,7 @@ to access this feature.
   2. System redirects user to their profile.
   3. User is able to see their profile information.
   4. User can click the toggle button "submitted recipes" to view their submitted recipes.
-  - **Primary Post-conditions:** User is able to view their profile.
+- **Primary Post-conditions:** User is able to view their profile.
 - **Alternate Sequence:** 
   1. The system is unable to load their information.
   2. System prompts user to refresh the page.
@@ -135,10 +135,15 @@ and also redirects them to their profile.
   2. The system will prompt the user to refresh and try again.
 
 ## View All Recipes <Frances>
-- **Pre-condition:** 
-- **Trigger:** 
+- **Pre-condition:** User must be signed in to their account to access this functionality.
+- **Trigger:** User clicks homepage.
 - **Primary Sequence:**
-- **Primary Post-conditions:** 
+  1. User clicks the "homepage" button.
+  2. System redirects user to the homepage page.
+  3. System shows all recipes available in the database.
+- **Primary Post-conditions:** User is able to view all recipes.
 - **Alternate Sequence:**
-- 
+  1. Database is not loading on the homepage.
+  2. System prompts an error page, "please refresh."
+
 ## Filter Recipes <Frances>
