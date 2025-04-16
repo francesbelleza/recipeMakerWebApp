@@ -48,8 +48,7 @@ describe multiple issues that may arise and their outcomes>
 ## User Registration <Dom>
 - **Pre-condition:** User is not signed in and does not have an account 
 - **Trigger:** User clicks "Sign up" button on the homepage
-- **Primary Sequence:** 
-1. User access registration page
+- **Primary Sequence:** 1. User access registration page
 2. User fills out registration page with username, email, and password
 3. User submits the form
 4. System validates the data 
