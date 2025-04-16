@@ -60,17 +60,17 @@ describe multiple issues that may arise and their outcomes>
 access this.
 - **Trigger:** Users click on the "rate" button found on specific recipe's page.
 - **Primary Sequence:**
-1. User clicks on the "rate" button found on the recipe's page.
-2. User is redirected by system to a different page, rating form page.
-3. User enters rating of recipe.
-4. User submits rating.
-5. The system saves the rating into the database.
+  1. User clicks on the "rate" button found on the recipe's page.
+  2. User is redirected by system to a different page, rating form page.
+  3. User enters rating of recipe.
+  4. User submits rating.
+  5. The system saves the rating into the database.
 - **Primary Post-conditions:** When the user completes their rating they're redirected
 to the original recipe they were looking at. The rating of specific recipe updates.
 - **Alternate Sequence:** 
-1. User is not logged into their account.
-2. The system will prompt that they're not logged in.
-3. The system will have a button to login.
+  1. User is not logged into their account.
+  2. The system will prompt that they're not logged in.
+  3. The system will have a button to login.
 
 ## Comment <Frances>
 - **Pre-condition:** Users must be logged onto their accounts to use
