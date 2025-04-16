@@ -46,59 +46,101 @@ describe multiple issues that may arise and their outcomes>
   3. ...
 
 ## User Registration <Dom>
-- **Pre-condition:** User is not signed in and does not have an account 
-- **Trigger:** User clicks "Sign up" button on the homepage
+- **Pre-condition:** User is not signed in and does not have an account. 
+- **Trigger:** User clicks "Sign up" button on the homepage.
 - **Primary Sequence:** 
-   1. User access registration page
-   2. User fills out registration page with username, email, and password
-   3. User submits the form
-   4. System validates the data  
-   5. System creates the new username
-   6. System logs the user in and redirects to the homepage
+   1. User access registration page.
+   2. User fills out registration page with username, email, and password.
+   3. User submits the form.
+   4. System validates the data.  
+   5. System creates the new username.
+   6. System logs the user in and redirects to the homepage.
 - **Primary Post-conditions:** User account is now stored in the database. User can now log in.
-- **Alternate Sequence:** If system cannot validate the data, there will be an error message "Something went wrong. Please try again" 
+- **Alternate Sequence:** 
+   1. If system cannot validate the data, there will be an error message "Something went wrong. Please try again".
 ## User login <Dom>
-- **Pre-condition:** 
-- **Trigger:**
+- **Pre-condition:** User must have a valid username and password and must be signed out. 
+- **Trigger:** User clicks "log in" button after inputting username and password.
 - **Primary Sequence:**
-- **Primary Post-conditions:**
+   1. User enters username and password.
+   2. User clicks "log in" button.
+   3. System validates data.
+   4. User gets redirected to homepage.
+- **Primary Post-conditions:** User is now authorized and now logged in. 
 - **Alternate Sequence:**
+   1. User cannot log in.
+   2. System will prompt a message "Unable to log in. Please try again".
 ## User logout <Dom>
-- **Pre-condition:** 
-- **Trigger:**
+- **Pre-condition:** User must be logged in. 
+- **Trigger:** User clicks "Log out" button.
 - **Primary Sequence:**
-- **Primary Post-conditions:**
+   1. User clicks "log out" button.
+   2. System ends the session.
+   3. User gets redirected to log in page.
+- **Primary Post-conditions:** User is logged out and system is clear.
 - **Alternate Sequence:**
+   1. User fails to log out.
+   2. System promps a message "Unable to sign out. Please Try again".
 ## Create recipe <Dom> 
-- **Pre-condition:** 
-- **Trigger:**
+- **Pre-condition:** User is logged in.
+- **Trigger:** User clicks "Create new recipe" button. 
 - **Primary Sequence:**
-- **Primary Post-conditions:**
+   1. User fills out the recipe creation form with title, description, ingredients, and instruction.
+   2. User submits the form.
+   3. System verifies the data.
+   4. Recipe is now saved to the database belonging to the user.
+   5. User gets redirected to the recipe view page. 
+- **Primary Post-conditions:** created recipe gets saved to the database and can be seen through recipe view page.
 - **Alternate Sequence:**
+   1. Cannot create a new recipe. 
+   2. System promps a message "Something went wrong, please try again"
 ## Edit Recipe <Dom>
-- **Pre-condition:** 
-- **Trigger:**
+- **Pre-condition:** User must be logged in and have an existing recipe.
+- **Trigger:** User clicks "Edit recipe" button. 
 - **Primary Sequence:**
-- **Primary Post-conditions:**
+   1. User edits recipe.
+   2. User submits the form.
+   3. System verifies the data and updates the database. 
+   4. User gets redirected to the recipe view page. 
+- **Primary Post-conditions:** Recipe is edited and updated through the database and can be seen through the recipe view page. 
 - **Alternate Sequence:**
+   1. There was no recipe to be found. 
+   2. System prompts a message "No recipe to edit".
 ## Delete Recipe <Dom>
-- **Pre-condition:** 
-- **Trigger:**
+- **Pre-condition:** There must be an existing recipe. 
+- **Trigger:** User clicks "delete recipe"
 - **Primary Sequence:**
-- **Primary Post-conditions:**
+   1. System promps a message "Are you sure you want to delete this?"
+   2. User confirms.
+   3. System verifies the data. 
+   4. System deletes the recipe from the database. 
+   5. User is redirected to the recipe view page. 
+- **Primary Post-conditions:** Recipe is deleted from the database. 
 - **Alternate Sequence:**
+   1. User cancels the action.
+   2. Recipe does not get deleted. 
 ## View Recipe <Dom>
-- **Pre-condition:** 
-- **Trigger:**
+- **Pre-condition:** There must be an existing recipe. 
+- **Trigger:** User clicks the recipe from searching or directly. 
 - **Primary Sequence:**
-- **Primary Post-conditions:**
+   1. User searches for recipe from the recipe view page. 
+   2. System gathers recipe data. 
+   3. Recipe is then shown along with the details. 
+- **Primary Post-conditions:** Recipe is shown to the user.
 - **Alternate Sequence:**
+   1. Recipe is not found
+   2. System prompts a message "Recipe cannot be found".
 ## Search Recipe<Dom>
-- **Pre-condition:** 
-- **Trigger:**
+- **Pre-condition:** There must be an existing recipe. 
+- **Trigger:** User types a title or ingredient in the search bar. 
 - **Primary Sequence:**
-- **Primary Post-conditions:**
+   1. System recieves the request. 
+   2. System finds the recipe from the database. 
+   3. User recieves the matching result. 
+- **Primary Post-conditions:** Related results are shown to the user. 
 - **Alternate Sequence:**
+   1. System cannot find the recipe. 
+   2. System prompts a message "Recipe cannot be found"
 
 
 ## Rate <Frances>
