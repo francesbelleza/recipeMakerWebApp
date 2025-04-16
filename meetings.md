@@ -14,9 +14,9 @@
 
  ### 4/15/2025 8:00pm - 8:30pm
  - ***Updates***
- - <ins>Frances: </ins>
-    - I worked on View all recipes use case. Just need 1 more use case. 
- - <ins>Dom: </ins>
-    - I worked on User registration use case. Just need 7 more use case. 
+   - <ins>Frances: </ins>
+      - I worked on View all recipes use case. Just need 1 more use case. 
+   - <ins>Dom: </ins>
+      - I worked on User registration use case. Just need 7 more use case. 
  - ***Pair-programming/group-progress:***
     - We worked on requirements. 
