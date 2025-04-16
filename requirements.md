@@ -46,11 +46,17 @@ describe multiple issues that may arise and their outcomes>
 3. ...
 
 ## User Registration <Dom>
-- **Pre-condition:** 
-- **Trigger:**
-- **Primary Sequence:**
-- **Primary Post-conditions:**
-- **Alternate Sequence:**
+- **Pre-condition:** User is not signed in and does not have an account 
+- **Trigger:** User clicks "Sign up" button on the homepage
+- **Primary Sequence:** 
+1. User access registration page
+2. User fills out registration page with username, email, and password
+3. User submits the form
+4. System validates the data 
+5. System creates the new username
+6. System logs the user in and redirects to the homepage
+- **Primary Post-conditions:** User account is now stored in the database. User can now log in.
+- **Alternate Sequence:** If system cannot validate the data, there will be an error message "Something went wrong. Please try again" 
 ## User login <Dom>
 - **Pre-condition:** 
 - **Trigger:**
