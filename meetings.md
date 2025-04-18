@@ -20,3 +20,15 @@
       - I worked on User registration use case. Just need 7 more use case. 
  - ***Pair-programming/group-progress:***
     - We worked on requirements. 
+
+### 4/18/2025 1:00pm - 1:30pm
+ - ***Updates***
+   - <ins>Frances: </ins>
+     - Finished use cases. 
+     - Added a mockup using figma
+     - My tasks this week are: ethical implications, 4 implementations, 1 pull request.
+   - <ins>Dom: </ins>
+      - Finished use cases.
+ - ***Pair-programming/group-progress:***
+    - Turned in Milestone 1 Requirements.
+    - Split up next Milestone 2 tasks.
