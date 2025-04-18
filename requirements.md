@@ -235,3 +235,16 @@ and also redirects them to their profile.
   2. System prompts an error page, "please refresh."
 
 ## Filter Recipes <Frances>
+- **Pre-condition:** User must be signed in to their accounts and in the view all recipes page
+to access this functionality.
+- **Trigger:** User clicks the filter button while viewing all recipes.
+- **Primary Sequence:**
+  1. User clicks the "homepage" button.
+  2. User is viewing all recipes and clicks on the filter button.
+  3. User clicks specific tags.
+  4. System pulls the recipes connected to those specific tags.
+- **Primary Post-conditions:** User is able to view tagged specific recipes.
+- **Alternate Sequence:**
+  1. User clicks a specific tag.
+  2. Recipes tagged with specific tag won't show up.
+  3. System prompts an error page, "please refresh."
