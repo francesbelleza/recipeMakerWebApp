@@ -13,6 +13,7 @@
     - We also talked about how to split up the work and how often we want to meet. 
 
  ### 4/15/2025 8:00pm - 8:30pm
+ - ***Frances and Dom attended***
  - ***Updates***
    - <ins>Frances: </ins>
       - I worked on View all recipes use case. Just need 1 more use case. 
@@ -22,6 +23,7 @@
     - We worked on requirements. 
 
 ### 4/18/2025 1:00pm - 1:30pm
+ - ***Frances and Dom attended***
  - ***Updates***
    - <ins>Frances: </ins>
      - Finished use cases. 
@@ -29,6 +31,9 @@
      - My tasks this week are: ethical implications, 4 implementations, 1 pull request.
    - <ins>Dom: </ins>
       - Finished use cases.
+      - My tasks this week are: Implementing README.md, 3 implementations, 1 pull request. 
  - ***Pair-programming/group-progress:***
     - Turned in Milestone 1 Requirements.
     - Split up next Milestone 2 tasks.
+
+
