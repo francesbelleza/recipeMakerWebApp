@@ -17,7 +17,7 @@
 
 ## UI Mockup 
 ![](/images/mockup_draft.png "UI Rough Mockup")
-made on figma
+<br>made on figma
 
 ## Non-functional Requirements
 1. The program runs on web browsers (Chrome, Safari, etc.)
