@@ -15,6 +15,8 @@
 14. **View All Recipes:** Main recipe lists shows all recipes available in the database. 
 15. **Filter Recipes:** Users may filter recipes by tags such as 'vegan', 'dessert', etc.
 
+![](/images/mockup_draft.png "UI Rough Mockup")
+
 ## Non-functional Requirements
 1. The program runs on web browsers (Chrome, Safari, etc.)
 2. The program implements SQLAlchemy for data scalability.
