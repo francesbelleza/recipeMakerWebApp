@@ -11,6 +11,7 @@ from datetime import datetime
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), unique=True, nullable=False)
+    email    = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(32), nullable=False)
     recipes = db.relationship('Recipe', backref='author', lazy=True)
 

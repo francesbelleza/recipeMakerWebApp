@@ -20,10 +20,8 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        # Prevent duplicate registrations
-        existing = User.query.filter_by(email=form.email.data).first()
-        if existing:
-            flash('Email already registered.', 'warning')
+        if User.query.filter_by(email=form.email.data).first():
+            flash('Email already in use.', 'warning')
             return redirect(url_for('register'))
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
@@ -44,14 +42,14 @@ def login():
             login_user(user, remember=form.remember_me.data)
             next_page = request.args.get('next')
             return redirect(next_page or url_for('home'))
-        flash('Login failed. Check username and password.', 'danger')
+        flash('Login failed. Check credentials.', 'danger')
     return render_template('login.html', form=form)
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.', 'info')
+    flash('Logged out.', 'info')
     return redirect(url_for('home'))
 
 @app.route('/recipe/new', methods=['GET', 'POST'])
@@ -77,10 +75,11 @@ def new_recipe():
 def delete_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
     if recipe.author != current_user:
-        flash('You cannot delete that recipe.', 'danger')
+        flash('Not allowed.', 'danger')
         return redirect(url_for('home'))
     db.session.delete(recipe)
     db.session.commit()
     flash(f'Recipe "{recipe.title}" deleted.', 'success')
     return redirect(url_for('home'))
+
 
