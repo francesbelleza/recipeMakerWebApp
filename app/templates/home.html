@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}All Recipes{% endblock %}
+{% block content %}
+  <h1>All Recipes</h1>
+  <ul class="list-group">
+    {% for recipe in recipes %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{{ url_for('recipe_detail', recipe_id=recipe.id) }}">
+          {{ recipe.title }}
+        </a>
+        <small class="text-muted">by {{ recipe.author.username }}</small>
+      </li>
+    {% else %}
+      <li class="list-group-item">No recipes yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
