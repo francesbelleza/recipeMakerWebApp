@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Add Recipe - Recipe App{% endblock %}
+{% block content %}
+  <h2>New Recipe</h2>
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.title.label(class_='form-label') }}
+      {{ form.title(class_='form-control') }}
+      {% for err in form.title.errors %}<div class="text-danger">{{ err }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.description.label(class_='form-label') }}
+      {{ form.description(class_='form-control', rows=3) }}
+      {% for err in form.description.errors %}<div class="text-danger">{{ err }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.ingredients.label(class_='form-label') }}
+      {{ form.ingredients(class_='form-control', rows=3) }}
+      {% for err in form.ingredients.errors %}<div class="text-danger">{{ err }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.instructions.label(class_='form-label') }}
+      {{ form.instructions(class_='form-control', rows=5) }}
+      {% for err in form.instructions.errors %}<div class="text-danger">{{ err }}</div>{% endfor %}
+    </div>
+    {{ form.submit(class_='btn btn-success') }}
+  </form>
+{% endblock %}
