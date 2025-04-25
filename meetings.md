@@ -36,4 +36,16 @@
     - Turned in Milestone 1 Requirements.
     - Split up next Milestone 2 tasks.
 
+### 4/25/2025 11:30am - 12:30pm
+ - ***Frances and Dom attended***
+ - ***Updates***
+   - <ins>Frances: </ins>
+      - Finished implementing 4 requirements.
+      - Finished writing ethical implications. 
+   - <ins>Dom: </ins>
+      - Finished implementing 3 requirements.
+      - Finished writing general instructions and installations. 
+ - ***Pair-programming/group-progress:***
+    - Fixed bugs together
+    - Talked about general instructions and installations. 
 
