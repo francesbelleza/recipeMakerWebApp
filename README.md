@@ -3,6 +3,9 @@
 - Frances Belleza (@francesbelleza)
 
 ## Installation <Dom>
+1. Install FlaskWTF
+    ````
+    pip install Flask-WTF 
 
 ## General Instruction <Dom>
 
