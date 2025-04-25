@@ -12,7 +12,9 @@
 - user login (implemented by Frances)
 - user logout (implemented by Frances)
 - create recipe (implemented by Frances)
-
+- Edit recipe (implemented by Dominic)
+- View recipe (implemented by Dominic)
+- Delete recipe (implemented by Dominic)
 ## Ethical Implications <Frances>
 In building this web application from an engineer’s perspective, 
 we have a few key ethical and professional responsibilities to address. 
