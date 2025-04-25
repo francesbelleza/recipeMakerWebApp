@@ -83,3 +83,41 @@ def delete_recipe(recipe_id):
     return redirect(url_for('home'))
 
 
+#EDIT RECIPE
+@app.route('/recipe/<int:recipe_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    if recipe.user_id != current_user.id:
+        flash('You are not authorized to edit this recipe.')
+        return redirect(url_for('view_recipe', recipe_id=recipe.id))
+    if request.method == 'POST':
+        recipe.title = request.form['title']
+        recipe.ingredients = request.form['ingredients']
+        recipe.instructions = request.form['instructions']
+        db.session.commit()
+        flash('Recipe updated successfully!')
+        return redirect(url_for('view_recipe', recipe_id=recipe.id))
+    return render_template('edit_recipe.html', recipe=recipe)
+
+#DELETE RECIPE
+@app.route('/recipe/<int:recipe_id>/delete', methods=['POST'])
+@login_required
+def delete_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    if recipe.user_id != current_user.id:
+        flash('You are not authorized to delete this recipe.')
+        return redirect(url_for('view_recipe', recipe_id=recipe.id))
+    db.session.delete(recipe)
+    db.session.commit()
+    flash('Recipe deleted successfully!')
+    return redirect(url_for('dashboard'))
+
+#VIEW RECIPE
+@app.route('/recipe/<int:recipe_id>')
+def view_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    return render_template('view_recipe.html', recipe=recipe)
+
+
+
