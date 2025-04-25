@@ -9,11 +9,6 @@ def home():
     recipes = Recipe.query.order_by(Recipe.created.desc()).all()
     return render_template('home.html', recipes=recipes)
 
-@app.route('/recipe/<int:recipe_id>')
-def recipe_detail(recipe_id):
-    recipe = Recipe.query.get_or_404(recipe_id)
-    return render_template('recipe_detail.html', recipe=recipe)
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -70,17 +65,17 @@ def new_recipe():
         return redirect(url_for('home'))
     return render_template('create_recipe.html', form=form)
 
-@app.route('/recipe/<int:recipe_id>/delete', methods=['POST'])
-@login_required
-def delete_recipe(recipe_id):
-    recipe = Recipe.query.get_or_404(recipe_id)
-    if recipe.author != current_user:
-        flash('Not allowed.', 'danger')
-        return redirect(url_for('home'))
-    db.session.delete(recipe)
-    db.session.commit()
-    flash(f'Recipe "{recipe.title}" deleted.', 'success')
-    return redirect(url_for('home'))
+#@app.route('/recipe/<int:recipe_id>/delete', methods=['POST'])
+#@login_required
+#def delete_recipe(recipe_id):
+#    recipe = Recipe.query.get_or_404(recipe_id)
+#    if recipe.author != current_user:
+#        flash('Not allowed.', 'danger')
+#        return redirect(url_for('home'))
+#    db.session.delete(recipe)
+#    db.session.commit()
+#    flash(f'Recipe "{recipe.title}" deleted.', 'success')
+#    return redirect(url_for('home'))
 
 
 #EDIT RECIPE
@@ -111,7 +106,7 @@ def delete_recipe(recipe_id):
     db.session.delete(recipe)
     db.session.commit()
     flash('Recipe deleted successfully!')
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('home'))
 
 #VIEW RECIPE
 @app.route('/recipe/<int:recipe_id>')
