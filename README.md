@@ -22,7 +22,7 @@ Open the terminal and download the following:
 2. Confirm the version of python by typing:
     ````
     python3 --version
-3. Create a directory and activate virtual environment:
+3. Create a directory, create a virtual environment and activate it:
     ````
     mkdir <project-folder>
     cd <project-folder>
@@ -35,7 +35,7 @@ Open the terminal and download the following:
     ````
     source venv/bin/activate
     ````
-4. Have flask installed along with SQLAlchemy and Flask-WTF
+4. Have flask installed along with SQLAlchemy and Flask-WTF (check in *"Installation"* section).
 5. If wanted, you can save installed packages in a file by:
     ````
     pip freeze > requirements.txt
