@@ -3,8 +3,46 @@
 - Frances Belleza (@francesbelleza)
 
 ## Installation <Dom>
+Open the terminal and download the following: 
+1. Install Python
+    ````
+    brew install python
+2. Install Flask
+    ```` 
+    pip install flask
+3. Install SQLAlchemy
+    ````
+    pip install flask SQLAlchemy 
+4. Install FlaskWTF
+    ````
+    pip install flask-wtf
 
 ## General Instruction <Dom>
+1. Use Homebrew to install python 
+2. Confirm the version of python by typing:
+    ````
+    python3 --version
+3. Create a directory and activate virtual environment:
+    ````
+    mkdir <project-folder>
+    cd <project-folder>
+    ````
+    Virtual environment:
+    ````
+    python3 -m venv venv
+    ````
+    Activate:
+    ````
+    source venv/bin/activate
+    ````
+4. Have flask installed along with SQLAlchemy and Flask-WTF
+5. If wanted, you can save installed packages in a file by:
+    ````
+    pip freeze > requirements.txt
+    ````
+
+
+
 
 ## Requirements Implemented
 
