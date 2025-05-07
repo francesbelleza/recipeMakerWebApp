@@ -2,47 +2,63 @@
 - Dominic Barrera (@bdom26)
 - Frances Belleza (@francesbelleza)
 
-## Installation <Dom>
-Open the terminal and download the following: 
-1. Install Python
-    ````
-    brew install python
-2. Install Flask
-    ```` 
-    pip install flask
-3. Install SQLAlchemy
-    ````
-    pip install flask SQLAlchemy 
-4. Install FlaskWTF
-    ````
-    pip install flask-wtf
+## How to Run this Program <Dom>
+### Prerequisites
+- Python3.8+ installed on your machine/laptop/computer
+- Git
+- terminal: linux, command Line, etc.
 
-## General Instruction <Dom>
-1. Use Homebrew to install python 
-2. Confirm the version of python by typing:
-    ````
-    python3 --version
-3. Create a directory, create a virtual environment and activate it:
-    ````
-    mkdir <project-folder>
-    cd <project-folder>
-    ````
-    Virtual environment:
-    ````
-    python3 -m venv venv
-    ````
-    Activate:
-    ````
-    source venv/bin/activate
-    ````
-4. Have flask installed along with SQLAlchemy and Flask-WTF (check in *"Installation"* section).
-5. If wanted, you can save installed packages in a file by:
-    ````
-    pip freeze > requirements.txt
-    ````
+<br/>
+**Note: The syntax underneath each bullet point below must be copied & 
+pasted into your terminal.**
 
+### 1. Clone the repository
+  - open your terminal
+  - clone this repo:
+     ```
+     git clone https://github.com/francesbelleza/recipeMakerWebApp.git
 
+  - move into the directory of this project:
+      ```
+      cd recipeMakerWebApp
 
+   
+### 2. Create & activate a virtual environment
+  -  make a new virtual environment folder:
+      ```
+      python3 -m venv venv
+
+  - activate your virtual environment:
+     ```
+     source venv/bin/active
+
+  - you should now see (venv) in front of your prompt, please refer to the picture below: <br/>  
+    ![](/images/prompt.png "venv prompt example")
+
+### 3. Install all dependencies
+   - install necessary dependencies:
+     ```
+     pip install -r requirements.txt
+
+### 4. Check configurations
+- make sure config.py & app.db is in your root folder
+
+### 5. Run the app
+- run the application using _either_ of the two commands:
+    ```
+    flask run
+- OR
+    ```
+    python3 run.py
+  
+- then type the following url into your browser of choice:
+    ```
+    http://127.0.0.1:5000/
+
+### 6. Navigate the application
+- navigate the application
+- to exit simply exit the web browser or in your terminal press ``control`` and 
+the letter ``c`` at the same time
 
 ## Requirements Implemented
 
