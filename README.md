@@ -6,9 +6,7 @@
 ### Prerequisites
 - Python3.8+ installed on your machine/laptop/computer
 - Git
-- terminal: linux, command Line, etc.
-
-<br/>
+- terminal: linux, command Line, etc. <br/>  
 **Note: The syntax underneath each bullet point below must be copied & 
 pasted into your terminal.**
 
