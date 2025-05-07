@@ -3,33 +3,29 @@
 - Frances Belleza (@francesbelleza)
 
 ## How to Run this Program <Dom>
-### Prerequisites
+### 1. Make sure you have the following prerequisites
 - Python3.8+ installed on your machine/laptop/computer
 - Git
 - terminal: linux, command Line, etc. <br/>  
 **Note: The syntax underneath each bullet point below must be copied & 
 pasted into your terminal.**
 
-### 1. Clone the repository
+### 2. Clone the repository
   - open your terminal
   - clone this repo:
      ```
      git clone https://github.com/francesbelleza/recipeMakerWebApp.git
-
   - move into the directory of this project:
       ```
       cd recipeMakerWebApp
 
-   
-### 2. Create & activate a virtual environment
+### 3. Create & activate a virtual environment
   -  make a new virtual environment folder:
       ```
       python3 -m venv venv
-
   - activate your virtual environment:
      ```
      source venv/bin/active
-
   - you should now see (venv) in front of your prompt, please refer to the picture below: <br/>  
     ![](/images/prompt.png "venv prompt example")
 
@@ -48,7 +44,6 @@ pasted into your terminal.**
 - OR
     ```
     python3 run.py
-  
 - then type the following url into your browser of choice:
     ```
     http://127.0.0.1:5000/
@@ -58,8 +53,8 @@ pasted into your terminal.**
 - to exit simply exit the web browser or in your terminal press ``control`` and 
 the letter ``c`` at the same time
 
-## Requirements Implemented
 
+## Requirements Implemented
 - user registration (implemented by Frances)
 - user login (implemented by Frances)
 - user logout (implemented by Frances)
@@ -67,6 +62,7 @@ the letter ``c`` at the same time
 - Edit recipe (implemented by Dominic)
 - View recipe (implemented by Dominic)
 - Delete recipe (implemented by Dominic)
+
 ## Ethical Implications <Frances>
 In building this web application from an engineer’s perspective, 
 we have a few key ethical and professional responsibilities to address. 
