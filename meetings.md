@@ -49,3 +49,14 @@
     - Fixed bugs together
     - Talked about general instructions and installations. 
 
+### 5/8/2025 3:00pm - 3:30pm
+ - ***Frances and Dom attended***
+ - ***Updates***
+   - <ins>Frances: </ins>
+      - Fixed milestone 2
+   - <ins>Dom: </ins>
+      - Started planning milestone 3
+ - ***Pair-programming/group-progress:***
+    - Split up functional requirements into 4
+    - Talked about milestone 3 
+
