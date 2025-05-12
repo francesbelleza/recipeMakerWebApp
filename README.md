@@ -62,6 +62,10 @@ the letter ``c`` at the same time
 - Edit recipe (implemented by Dominic)
 - View recipe (implemented by Dominic)
 - Delete recipe (implemented by Dominic)
+- search recipe (implemented by Frances)
+- rate recipe (implemented by Frances)
+- comment (implemented by Frances)
+- view user profile (implemented by Frances)
 
 ## Ethical Implications <Frances>
 In building this web application from an engineer’s perspective, 

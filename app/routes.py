@@ -1,13 +1,27 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, current_user, logout_user, login_required
+from sqlalchemy import or_
 from app import app, db
-from app.models import User, Recipe
-from app.forms import RegistrationForm, LoginForm, NewRecipe
+from app.models import User, Recipe, Rating, Comment
+from app.forms import RegistrationForm, LoginForm, NewRecipe, SearchForm, RatingForm, CommentForm, DeleteForm
+from statistics import mean
 
-@app.route('/')
+
+@app.route('/', methods=['GET','POST'])
 def home():
+    form    = SearchForm()
     recipes = Recipe.query.order_by(Recipe.created.desc()).all()
-    return render_template('home.html', recipes=recipes)
+
+    if form.validate_on_submit():
+        q = f"%{form.query.data}%"
+        recipes = Recipe.query.filter(
+            or_(
+                Recipe.title.ilike(q),
+                Recipe.ingredients.ilike(q)
+            )
+        ).all()
+
+    return render_template('home.html', recipes=recipes, form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -78,41 +92,119 @@ def new_recipe():
 #    return redirect(url_for('home'))
 
 
-#EDIT RECIPE
-@app.route('/recipe/<int:recipe_id>/edit', methods=['GET', 'POST'])
+@app.route('/recipe/<int:recipe_id>/edit', methods=['GET','POST'])
 @login_required
 def edit_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
-    if recipe.user_id != current_user.id:
-        flash('You are not authorized to edit this recipe.')
+    if recipe.author != current_user:
+        flash('Not allowed.', 'danger')
         return redirect(url_for('view_recipe', recipe_id=recipe.id))
-    if request.method == 'POST':
-        recipe.title = request.form['title']
-        recipe.ingredients = request.form['ingredients']
-        recipe.instructions = request.form['instructions']
-        db.session.commit()
-        flash('Recipe updated successfully!')
-        return redirect(url_for('view_recipe', recipe_id=recipe.id))
-    return render_template('edit_recipe.html', recipe=recipe)
 
-#DELETE RECIPE
+    if request.method == 'POST':
+        form = NewRecipe()
+    else:
+        form = NewRecipe(obj=recipe)
+
+    if form.validate_on_submit():
+        form.populate_obj(recipe)
+        db.session.commit()
+        flash('Recipe updated!', 'success')
+        return redirect(url_for('view_recipe', recipe_id=recipe.id))
+
+    return render_template('edit_recipe.html', form=form, recipe=recipe)
+
+
+@app.route('/recipe/<int:recipe_id>')
+def view_recipe(recipe_id):
+    recipe       = Recipe.query.get_or_404(recipe_id)
+    rating_form  = RatingForm()
+    comment_form = CommentForm()
+    delete_form = DeleteForm()
+
+    # compute avg if there are any ratings
+    ratings = [r.score for r in recipe.ratings]
+    avg_rating = mean(ratings) if ratings else None
+
+    return render_template(
+        'view_recipe.html',
+        recipe=recipe,
+        rating_form=rating_form,
+        comment_form=comment_form,
+        delete_form=delete_form,
+        avg_rating=avg_rating
+    )
+
+@app.route("/search", methods=["GET","POST"])
+def search():
+    form = SearchForm()
+    recipes = []
+    if form.validate_on_submit():
+        q = f"%{form.query.data}%"
+        recipes = Recipe.query.filter(
+            db.or_(
+              Recipe.title.ilike(q),
+              Recipe.ingredients.ilike(q)
+            )
+        ).all()
+    return render_template("home.html", recipes=recipes, form=form)
+
+@app.route("/recipe/<int:recipe_id>/rate", methods=["POST"])
+@login_required
+def rate(recipe_id):
+    form = RatingForm()
+    if form.validate_on_submit():
+        # delete old rating by this user, if any
+        old = Rating.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
+        if old:
+            db.session.delete(old)
+        new = Rating(score=form.score.data, user_id=current_user.id, recipe_id=recipe_id)
+        db.session.add(new)
+        db.session.commit()
+        flash("Thanks for your rating!", "success")
+    return redirect(url_for("view_recipe", recipe_id=recipe_id))
+
 @app.route('/recipe/<int:recipe_id>/delete', methods=['POST'])
 @login_required
 def delete_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
-    if recipe.user_id != current_user.id:
-        flash('You are not authorized to delete this recipe.')
-        return redirect(url_for('view_recipe', recipe_id=recipe.id))
+    if recipe.author != current_user:
+        flash('Not allowed to delete this recipe.', 'danger')
+        return redirect(url_for('home'))
+
+    #needed so we can delete recipes
+    Comment.query.filter_by(recipe_id=recipe.id).delete()
+    Rating.query.filter_by(recipe_id=recipe.id).delete()
+
     db.session.delete(recipe)
     db.session.commit()
-    flash('Recipe deleted successfully!')
+
+    flash('Recipe deleted.', 'success')
     return redirect(url_for('home'))
 
-#VIEW RECIPE
-@app.route('/recipe/<int:recipe_id>')
-def view_recipe(recipe_id):
-    recipe = Recipe.query.get_or_404(recipe_id)
-    return render_template('view_recipe.html', recipe=recipe)
+@app.route("/recipe/<int:recipe_id>/comment", methods=["POST"])
+@login_required
+def comment(recipe_id):
+    form = CommentForm()
+    if form.validate_on_submit():
+        c = Comment(body=form.body.data, user_id=current_user.id, recipe_id=recipe_id)
+        db.session.add(c)
+        db.session.commit()
+        flash("Comment posted!", "success")
+    return redirect(url_for("view_recipe", recipe_id=recipe_id))
+
+@app.route("/user/<int:user_id>")
+@login_required
+def profile(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template("profile.html", user=user)
+
+
+################## FOR DOM TO ADDDD ############################
+@app.route('/recipe/<int:recipe_id>/save', methods=['POST'])
+@login_required
+def save_recipe(recipe_id):
+    flash("Save feature coming soon!", "info")
+    return redirect(url_for('view_recipe', recipe_id=recipe_id))
 
 
 

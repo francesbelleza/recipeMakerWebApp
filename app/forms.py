@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.fields.simple import TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
@@ -22,3 +22,18 @@ class NewRecipe(FlaskForm):
     ingredients = TextAreaField('Ingredients', validators=[DataRequired()])
     instructions = TextAreaField('Instructions', validators=[DataRequired()])
     submit = SubmitField('Save')
+
+class SearchForm(FlaskForm):
+    query = StringField("Search", validators=[DataRequired()])
+    submit = SubmitField("Go")
+
+class RatingForm(FlaskForm):
+    score = SelectField("Rate this recipe", choices=[(str(i), i) for i in range(1,6)], coerce=int)
+    submit = SubmitField("Submit Rating")
+
+class CommentForm(FlaskForm):
+    body = TextAreaField("Your comment", validators=[DataRequired(), Length(max=500)])
+    submit = SubmitField("Post Comment")
+
+class DeleteForm(FlaskForm):
+    submit = SubmitField('Delete')
