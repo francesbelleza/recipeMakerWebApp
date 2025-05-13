@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}All Recipes{% endblock %}
+
+{% block content %}
+  <h2>All Recipes</h2>
+
+  {% if recipes %}
+    <ul class="list-group">
+        {% for recipe in recipes %}
+         <li class="list-group-item">
+            <a href="{{ url_for('view_recipe', recipe_id=recipe.id) }}">
+                 {{ recipe.title }} by {{ recipe.author.username }}</a>
+            <br>
+            <small>Tags:
+                {% for tag in recipe.tags %}
+                 <a href="{{ url_for('recipes_by_tag', tag_name=tag.name) }}" class="badge bg-info text-dark">{{ tag.name }}</a>
+                {% else %}
+                 <span class="text-muted">None</span>
+                {% endfor %}
+             </small>
+         </li>
+     {% endfor %}
+    </ul>
+  
+  {% else %}
+    <p>No recipes have been added yet.</p>
+  {% endif %}
+{% endblock %}
