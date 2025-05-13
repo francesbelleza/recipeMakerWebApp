@@ -7,6 +7,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from datetime import datetime
 
+saved_recipes = db.Table('saved_recipes',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id'))
+)
+
+recipe_tags = db.Table('recipe_tags',
+    db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')),
+    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
+)
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,6 +25,7 @@ class User(db.Model, UserMixin):
     recipes = db.relationship('Recipe', backref='author', lazy=True)
     ratings  = db.relationship('Rating',  backref='user',   lazy=True)    # ← add this
     comments = db.relationship('Comment', backref='user',   lazy=True)
+    saved_recipes = db.relationship('Recipe', secondary=saved_recipes, backref='saved_by_users')
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -34,6 +44,7 @@ class Recipe(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
     ratings  = db.relationship('Rating',  backref='recipe', lazy=True)
     comments = db.relationship('Comment', backref='recipe', lazy=True)
+    tags = db.relationship('Tag', secondary=recipe_tags, backref='recipes')
 
 class Rating(db.Model):
     id        = db.Column(db.Integer, primary_key=True)
@@ -48,4 +59,9 @@ class Comment(db.Model):
     user_id   = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), unique=True, nullable=False)
+
 
