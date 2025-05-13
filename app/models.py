@@ -20,9 +20,8 @@ recipe_tags = db.Table('recipe_tags',
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), unique=True, nullable=False)
-    display_name = db.Column(db.String(100))
     email    = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(128), nullable=False)
+    password = db.Column(db.String(32), nullable=False)
     recipes = db.relationship('Recipe', backref='author', lazy=True)
     ratings  = db.relationship('Rating',  backref='user',   lazy=True)    # ← add this
     comments = db.relationship('Comment', backref='user',   lazy=True)
