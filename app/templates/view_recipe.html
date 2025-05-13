@@ -135,4 +135,19 @@
             <li class="list-group-item">No comments yet.</li>
           {% endfor %}
         </ul>
+
+
+    {% if current_user.is_authenticated %}
+        {% if recipe in current_user.saved_recipes %}
+            <form method="POST" action="{{ url_for('unsave_recipe', recipe_id=recipe.id) }}">
+                <button type="submit">Unsave Recipe</button>
+            </form>
+        {% else %}
+            <form method="POST" action="{{ url_for('save_recipe', recipe_id=recipe.id) }}">
+                <button type="submit">Save Recipe</button>
+            </form>
+        {% endif %}
+    {% endif %}
+    
+
 {% endblock %}
