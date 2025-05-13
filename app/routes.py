@@ -8,7 +8,7 @@ from statistics import mean
 
 
 @app.route('/', methods=['GET','POST'])
-def home('/'):
+def home():
     form    = SearchForm()
     recipes = Recipe.query.order_by(Recipe.created.desc()).all()
 
