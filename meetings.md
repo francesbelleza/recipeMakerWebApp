@@ -70,5 +70,3 @@
       - Finished implementing the last 4 requirements
  - ***Pair-programming/group-progress:***
     - Did the last 4 requirements together to fix some bugs
-
-
