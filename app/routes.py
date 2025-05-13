@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import or_
 from app import app, db
-from app.models import User, Recipe, Rating, Comment
+from app.models import User, Recipe, Rating, Comment, Tag
 from app.forms import RegistrationForm, LoginForm, NewRecipe, SearchForm, RatingForm, CommentForm, DeleteForm, EditProfileForm
 from statistics import mean
 
