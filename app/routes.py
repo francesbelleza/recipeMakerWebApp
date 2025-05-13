@@ -5,6 +5,7 @@ from app import app, db
 from app.models import User, Recipe, Rating, Comment
 from app.forms import RegistrationForm, LoginForm, NewRecipe, SearchForm, RatingForm, CommentForm, DeleteForm
 from statistics import mean
+from app.forms import EditProfileForm
 
 
 @app.route('/', methods=['GET','POST'])
