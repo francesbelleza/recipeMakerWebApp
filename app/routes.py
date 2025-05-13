@@ -1,27 +1,48 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import or_
 from app import app, db
-from app.models import User, Recipe, Rating, Comment
-from app.forms import RegistrationForm, LoginForm, NewRecipe, SearchForm, RatingForm, CommentForm, DeleteForm
+from app.models import User, Recipe, Rating, Comment, Tag
+from app.forms import RegistrationForm, LoginForm, NewRecipe, SearchForm, RatingForm, CommentForm, DeleteForm, EditProfileForm
 from statistics import mean
-
 
 @app.route('/', methods=['GET','POST'])
 def home():
-    form    = SearchForm()
-    recipes = Recipe.query.order_by(Recipe.created.desc()).all()
+    form          = SearchForm()
+    tag_name      = request.args.get('tag')     # ?tag=Vegan
+    selected_tag  = tag_name
+
+    # start from the base Recipe.query
+    query = Recipe.query
 
     if form.validate_on_submit():
         q = f"%{form.query.data}%"
-        recipes = Recipe.query.filter(
+        query = query.filter(
             or_(
                 Recipe.title.ilike(q),
                 Recipe.ingredients.ilike(q)
             )
-        ).all()
+        )
+    elif tag_name:
+        # join through the secondary table to Tag
+        query = (
+            query
+            .join(Recipe.tags)
+            .filter(Tag.name == tag_name)
+        )
 
-    return render_template('home.html', recipes=recipes, form=form)
+    # finally order & fetch
+    recipes  = query.order_by(Recipe.created.desc()).all()
+    all_tags = Tag.query.order_by(Tag.name).all()
+
+    return render_template(
+        'home.html',
+        recipes=recipes,
+        form=form,
+        all_tags=all_tags,
+        selected_tag=selected_tag
+    )
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -65,6 +86,9 @@ def logout():
 @login_required
 def new_recipe():
     form = NewRecipe()
+
+    form.tags.choices = [(t.id, t.name) for t in Tag.query.order_by(Tag.name)]
+
     if form.validate_on_submit():
         recipe = Recipe(
             title=form.title.data,
@@ -73,45 +97,15 @@ def new_recipe():
             instructions=form.instructions.data,
             author=current_user
         )
+
+        recipe.tags = Tag.query.filter(Tag.id.in_(form.tags.data)).all()
+
         db.session.add(recipe)
         db.session.commit()
         flash('Recipe added!', 'success')
         return redirect(url_for('home'))
+
     return render_template('create_recipe.html', form=form)
-
-#@app.route('/recipe/<int:recipe_id>/delete', methods=['POST'])
-#@login_required
-#def delete_recipe(recipe_id):
-#    recipe = Recipe.query.get_or_404(recipe_id)
-#    if recipe.author != current_user:
-#        flash('Not allowed.', 'danger')
-#        return redirect(url_for('home'))
-#    db.session.delete(recipe)
-#    db.session.commit()
-#    flash(f'Recipe "{recipe.title}" deleted.', 'success')
-#    return redirect(url_for('home'))
-
-
-@app.route('/recipe/<int:recipe_id>/edit', methods=['GET','POST'])
-@login_required
-def edit_recipe(recipe_id):
-    recipe = Recipe.query.get_or_404(recipe_id)
-    if recipe.author != current_user:
-        flash('Not allowed.', 'danger')
-        return redirect(url_for('view_recipe', recipe_id=recipe.id))
-
-    if request.method == 'POST':
-        form = NewRecipe()
-    else:
-        form = NewRecipe(obj=recipe)
-
-    if form.validate_on_submit():
-        form.populate_obj(recipe)
-        db.session.commit()
-        flash('Recipe updated!', 'success')
-        return redirect(url_for('view_recipe', recipe_id=recipe.id))
-
-    return render_template('edit_recipe.html', form=form, recipe=recipe)
 
 
 @app.route('/recipe/<int:recipe_id>')
@@ -133,6 +127,36 @@ def view_recipe(recipe_id):
         delete_form=delete_form,
         avg_rating=avg_rating
     )
+
+
+@app.route('/recipe/<int:recipe_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    if recipe.author != current_user:
+        abort(403)
+
+    form = NewRecipe(obj=recipe)
+    form.tags.choices = [(t.id, t.name) for t in Tag.query.order_by(Tag.name)]
+
+    if form.validate_on_submit():
+        recipe.title = form.title.data
+        recipe.description = form.description.data
+        recipe.ingredients = form.ingredients.data
+        recipe.instructions = form.instructions.data
+
+        recipe.tags = (
+            Tag.query
+            .filter(Tag.id.in_(form.tags.data))
+            .all()
+        )
+
+        db.session.commit()
+        flash('Recipe updated!', 'success')
+        return redirect(url_for('view_recipe', recipe_id=recipe.id))
+
+    return render_template('edit_recipe.html', form=form, recipe=recipe)
+
 
 @app.route("/search", methods=["GET","POST"])
 def search():
@@ -198,12 +222,34 @@ def profile(user_id):
     user = User.query.get_or_404(user_id)
     return render_template("profile.html", user=user)
 
+@app.route('/profile/edit', methods=['GET','POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm(
+      username=current_user.username,
+      email=current_user.email
+    )
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email    = form.email.data
+        if form.password.data:
+            current_user.set_password(form.password.data)
+        db.session.commit()
+        flash('Profile updated!', 'success')
+        return redirect(url_for('profile', user_id=current_user.id))
+    return render_template('edit_profile.html', form=form)
 
-################## FOR DOM TO ADDDD ############################
 @app.route('/recipe/<int:recipe_id>/save', methods=['POST'])
 @login_required
 def save_recipe(recipe_id):
-    flash("Save feature coming soon!", "info")
+    r = Recipe.query.get_or_404(recipe_id)
+    if r in current_user.saved_recipes:
+        current_user.saved_recipes.remove(r)
+        flash('Removed from your saved recipes', 'info')
+    else:
+        current_user.saved_recipes.append(r)
+        flash('Saved!', 'success')
+    db.session.commit()
     return redirect(url_for('view_recipe', recipe_id=recipe_id))
 
 

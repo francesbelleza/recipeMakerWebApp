@@ -13,4 +13,16 @@
       <li class="list-group-item">No recipes yet.</li>
     {% endfor %}
   </ul>
+  <h3 class="mt-4">Saved Recipes</h3>
+  <ul class="list-group">
+    {% for r in user.saved_recipes %}
+      <li class="list-group-item">
+        <a href="{{ url_for('view_recipe', recipe_id=r.id) }}">{{ r.title }}</a>
+      </li>
+    {% else %}
+      <li class="list-group-item">No saved recipes.</li>
+    {% endfor %}
+  </ul>
 {% endblock %}
+
+

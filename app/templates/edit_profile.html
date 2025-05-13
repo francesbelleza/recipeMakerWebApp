@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">Edit Your Profile</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.username.label(class_="form-label") }}
+      {{ form.username(class_="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.email.label(class_="form-label") }}
+      {{ form.email(class_="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.password.label(class_="form-label") }}
+      {{ form.password(class_="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.confirm_password.label(class_="form-label") }}
+      {{ form.confirm_password(class_="form-control") }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+    <a href="{{ url_for('profile', user_id=current_user.id) }}"
+       class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+{% endblock %}

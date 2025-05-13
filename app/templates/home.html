@@ -2,11 +2,25 @@
 {% block title %}All Recipes{% endblock %}
 {% block content %}
 
-<form method="POST" class="d-flex mb-3">
-  {{ form.hidden_tag() }}
-  {{ form.query(class_="form-control me-2", placeholder="Search recipes…") }}
-  {{ form.submit(class_="btn btn-outline-secondary") }}
-</form>
+  <form method="POST" class="d-flex mb-3">
+    {{ form.hidden_tag() }}
+    {{ form.query(class_="form-control me-2", placeholder="Search recipes…") }}
+    {{ form.submit(class_="btn btn-outline-secondary") }}
+  </form>
+
+  <div class="mb-4">
+    <span class="me-2">Filter by tag:</span>
+    <a href="{{ url_for('home') }}"
+       class="btn btn-sm {{ not selected_tag and 'btn-primary' or 'btn-outline-primary' }} me-1">
+      All
+    </a>
+    {% for tag in all_tags %}
+      <a href="{{ url_for('home', tag=tag.name) }}"
+         class="btn btn-sm {{ selected_tag==tag.name and 'btn-primary' or 'btn-outline-primary' }} me-1">
+        {{ tag.name }}
+      </a>
+    {% endfor %}
+  </div>
 
   <h1>All Recipes</h1>
   <ul class="list-group">

@@ -64,10 +64,20 @@
 
     <div class="mb-4">
 
-      <form method="POST" action="{{ url_for('save_recipe', recipe_id=recipe.id) }}" class="d-inline me-2">
-        {{ comment_form.hidden_tag() }}
-        <button type="submit" class="btn btn-outline-success">Save ♥</button>
-      </form>
+        <form method="POST"
+              action="{{ url_for('save_recipe', recipe_id=recipe.id) }}"
+              class="d-inline me-2">
+          {{ delete_form.csrf_token }}  {# or a dedicated form.csrf_token #}
+          {% if recipe in current_user.saved_recipes %}
+            <button type="submit" class="btn btn-success btn-sm rounded-pill">
+              Unsave 💔
+            </button>
+          {% else %}
+            <button type="submit" class="btn btn-success btn-sm rounded-pill">
+              Save ♥
+            </button>
+          {% endif %}
+        </form>
 
       <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#rateModal">
         Rate

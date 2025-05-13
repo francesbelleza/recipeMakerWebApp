@@ -32,6 +32,15 @@
         <div class="text-danger">{{ err }}</div>
       {% endfor %}
     </div>
+    <div class="mb-3">
+      {{ form.tags.label(class_="form-label") }}
+      {{ form.tags(class_="form-select", multiple=True) }}
+      {% for err in form.tags.errors %}
+        <div class="text-danger">{{ err }}</div>
+      {% endfor %}
+    </div>
     {{ form.submit(class_="btn btn-success") }}
   </form>
 {% endblock %}
+
+
