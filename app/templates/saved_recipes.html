@@ -1,0 +1,9 @@
+<h2>Your Saved Recipes</h2>
+<ul>
+    {% for recipe in recipes %}
+        <li><a href="{{ url_for('view_recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></li>
+    {% else %}
+        <li>You have no saved recipes.</li>
+    {% endfor %}
+</ul>
+
