@@ -239,8 +239,8 @@ def saved_recipes():
 @app.route('/profile/edit', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
-    
+    form = EditProfileForm(obj=current_user)  # prepopulate with current user data
+
     if form.validate_on_submit():
         if not check_password_hash(current_user.password, form.current_password.data):
             flash('Current password is incorrect.', 'danger')
@@ -254,9 +254,10 @@ def edit_profile():
 
         db.session.commit()
         flash('Your profile has been updated!', 'success')
-        return redirect(url_for('profile'))  # Redirect to the profile view (if you have one)
+        return redirect(url_for('profile'))  
 
     return render_template('edit_profile.html', form=form)
+
 
 
 @app.route('/recipes')
