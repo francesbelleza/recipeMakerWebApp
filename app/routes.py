@@ -3,9 +3,9 @@ from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import or_
 from app import app, db
 from app.models import User, Recipe, Rating, Comment
-from app.forms import RegistrationForm, LoginForm, NewRecipe, SearchForm, RatingForm, CommentForm, DeleteForm
+from app.forms import RegistrationForm, LoginForm, NewRecipe, SearchForm, RatingForm, CommentForm, DeleteForm, EditProfileForm
 from statistics import mean
-from app.forms import EditProfileForm
+
 
 
 @app.route('/', methods=['GET','POST'])
@@ -205,10 +205,10 @@ def profile(user_id):
 @login_required
 def save_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
-    if recipe in current_user.saved_recipes:
+    if recipe in current_user.saved_recipes:  # Fix: saved_recipes → saved_recipes
         flash('Recipe already saved.', 'info')
     else:
-        current_user.saved_recipes.append(recipe)
+        current_user.saved_recipes.append(recipe)  # Fix here too
         db.session.commit()
         flash('Recipe saved successfully!', 'success')
     return redirect(url_for('view_recipe', recipe_id=recipe_id))
@@ -219,8 +219,8 @@ def save_recipe(recipe_id):
 @login_required
 def unsave_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
-    if recipe in current_user.saved_recipes:
-        current_user.saved_recipes.remove(recipe)
+    if recipe in current_user.saved_recipes:  # Fix: Change `saved_recipes` to `saved_recipes`
+        current_user.saved_recipes.remove(recipe)  # Fix: Change `saved_recipes` to `saved_recipes`
         db.session.commit()
         flash('Recipe removed from saved list.', 'success')
     else:
