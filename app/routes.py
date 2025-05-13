@@ -235,7 +235,8 @@ def saved_recipes():
     return render_template('saved_recipes.html', recipes=current_user.saved_recipes)
 
 
-
+@app.route('/profile/edit', methods=['GET', 'POST'])
+@login_required
 def edit_profile():
     form = EditProfileForm()
     
