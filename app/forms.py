@@ -21,6 +21,7 @@ class NewRecipe(FlaskForm):
     description = TextAreaField('Description', validators = [DataRequired()])
     ingredients = TextAreaField('Ingredients', validators=[DataRequired()])
     instructions = TextAreaField('Instructions', validators=[DataRequired()])
+    tags = StringField('Tags (comma-separated)')
     submit = SubmitField('Save')
 
 class SearchForm(FlaskForm):
@@ -37,3 +38,11 @@ class CommentForm(FlaskForm):
 
 class DeleteForm(FlaskForm):
     submit = SubmitField('Delete')
+
+class EditProfileForm(FlaskForm):
+    display_name = StringField('Display Name', validators=[DataRequired(), Length(min=2, max=100)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    current_password = PasswordField('Current Password', validators=[DataRequired()])
+    new_password = PasswordField('New Password', validators=[Length(min=8), EqualTo('confirm_password', message='Passwords must match')])
+    confirm_password = PasswordField('Confirm New Password')
+    submit = SubmitField('Save Changes')
