@@ -2,6 +2,10 @@
 - Dominic Barrera (@bdom26)
 - Frances Belleza (@francesbelleza)
 
+## Video Link To Our Project
+**we used canva for our video**
+[canva video](https://www.canva.com/design/DAGnTqoB424/fbBEOV3IIsvRNi6HXebdPA/watch?utm_content=DAGnTqoB424&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h33d1a31042)
+
 ## How to Run this Program <Dom>
 ### 1. Make sure you have the following prerequisites
 - Python3.8+ installed on your machine/laptop/computer

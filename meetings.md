@@ -60,3 +60,14 @@
     - Split up functional requirements into 4
     - Talked about milestone 3 
 
+### 5/12/2025 9:00pm - 11:30pm
+- ***Frances and Dom attended***
+- ***Updates***
+  - <ins>Frances: </ins>
+    - Finished implementing the first 4 requirements
+    - Did a 5 minute video introducing our application
+  - <ins>Dom: </ins>
+     - Finished implementing the last 4 requirements
+  - ***Pair-programming/group-progress:***
+    - Did the last 4 requirements together to fix some bugs
+
