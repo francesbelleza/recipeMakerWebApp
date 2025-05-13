@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block title %}All Recipes{% endblock %}
 {% block content %}
+
+<form method="POST" class="d-flex mb-3">
+  {{ form.hidden_tag() }}
+  {{ form.query(class_="form-control me-2", placeholder="Search recipes…") }}
+  {{ form.submit(class_="btn btn-outline-secondary") }}
+</form>
+
   <h1>All Recipes</h1>
   <ul class="list-group">
     {% for recipe in recipes %}

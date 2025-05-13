@@ -1,15 +1,138 @@
 {% extends "base.html" %}
-{% block title %}Add Recipe{% endblock %}
+{% block title %}{{ recipe.title }}{% endblock %}
+
 {% block content %}
     <h1>{{ recipe.title }}</h1>
-        <p><strong>Ingredients:</strong></p>
-        <p>{{ recipe.ingredients }}</p>
-        <p><strong>Instructions:</strong></p>
-        <p>{{ recipe.instructions }}</p>
-        {% if current_user.is_authenticated and current_user.id == recipe.user_id %}
-            <a href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}">Edit</a>
-            <form action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}" method="POST" style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
-        {% endif %}
+
+    {% if avg_rating %}
+      <p>
+        {% for i in range(1,6) %}
+          {% if i <= avg_rating %}
+            <span class="text-warning">&#9733;</span>
+          {% else %}
+            <span class="text-secondary">&#9734;</span>
+          {% endif %}
+        {% endfor %}
+        <small>({{ '%.1f'|format(avg_rating) }})</small>
+      </p>
+    {% else %}
+      <p><em>No ratings yet.</em></p>
+    {% endif %}
+
+    <p><strong>Description:</strong></p>
+    <p>{{ recipe.description }}</p>
+
+    <p><strong>Ingredients:</strong></p>
+    {% if '\n' in recipe.ingredients %}
+      <ul>
+        {% for item in recipe.ingredients.split('\n') if item.strip() %}
+          <li>{{ item.strip() }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>{{ recipe.ingredients }}</p>
+    {% endif %}
+
+    <p><strong>Instructions:</strong></p>
+    {% if '\n' in recipe.instructions %}
+      <ol>
+        {% for step in recipe.instructions.split('\n') if step.strip() %}
+          <li>{{ step.strip() }}</li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p>{{ recipe.instructions }}</p>
+    {% endif %}
+
+    {% if current_user.is_authenticated and current_user.id == recipe.user_id %}
+        <div class="d-flex gap-2 mb-4">
+          <a href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}"
+             class="btn btn-dark btn-sm rounded-pill me-2">
+            Edit
+          </a>
+
+          <form action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}"
+                method="POST"
+                class="d-inline">
+            {{ delete_form.hidden_tag() }}
+            {{ delete_form.submit(class_="btn btn-dark btn-sm rounded-pill") }}
+          </form>
+        </div>
+    {% endif %}
+
+
+
+    <div class="mb-4">
+
+      <form method="POST" action="{{ url_for('save_recipe', recipe_id=recipe.id) }}" class="d-inline me-2">
+        {{ comment_form.hidden_tag() }}
+        <button type="submit" class="btn btn-outline-success">Save ♥</button>
+      </form>
+
+      <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#rateModal">
+        Rate
+      </button>
+
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#commentModal">
+        Comment
+      </button>
+    </div>
+
+    <div class="modal fade" id="rateModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <form method="POST" action="{{ url_for('rate', recipe_id=recipe.id) }}">
+          {{ rating_form.hidden_tag() }}
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Rate “{{ recipe.title }}”</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              {{ rating_form.score.label(class_="form-label") }}
+              {{ rating_form.score(class_="form-select") }}
+            </div>
+            <div class="modal-footer">
+              {{ rating_form.submit(class_="btn btn-primary") }}
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <form method="POST" action="{{ url_for('comment', recipe_id=recipe.id) }}">
+          {{ comment_form.hidden_tag() }}
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Comment on “{{ recipe.title }}”</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              {{ comment_form.body.label(class_="form-label") }}
+              {{ comment_form.body(class_="form-control", rows=4) }}
+            </div>
+            <div class="modal-footer">
+              {{ comment_form.submit(class_="btn btn-primary") }}
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <hr>
+
+    <h3>Comments</h3>
+        <ul class="list-group mb-4">
+          {% for c in recipe.comments %}
+            <li class="list-group-item">
+              <strong>{{ c.user.username }}</strong>
+              <span class="text-muted small">on {{ c.timestamp.strftime("%Y-%m-%d") }}</span>
+              <p class="mb-0">{{ c.body }}</p>
+            </li>
+          {% else %}
+            <li class="list-group-item">No comments yet.</li>
+          {% endfor %}
+        </ul>
 {% endblock %}

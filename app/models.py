@@ -14,6 +14,8 @@ class User(db.Model, UserMixin):
     email    = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(32), nullable=False)
     recipes = db.relationship('Recipe', backref='author', lazy=True)
+    ratings  = db.relationship('Rating',  backref='user',   lazy=True)    # ← add this
+    comments = db.relationship('Comment', backref='user',   lazy=True)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -30,6 +32,20 @@ class Recipe(db.Model):
     instructions = db.Column(db.Text, nullable = False)
     created = db.Column(db.DateTime, default=datetime.utcnow) # use current time
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
+    ratings  = db.relationship('Rating',  backref='recipe', lazy=True)
+    comments = db.relationship('Comment', backref='recipe', lazy=True)
 
+class Rating(db.Model):
+    id        = db.Column(db.Integer, primary_key=True)
+    score     = db.Column(db.Integer, nullable=False)  # 1–5
+    user_id   = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
+class Comment(db.Model):
+    id        = db.Column(db.Integer, primary_key=True)
+    body      = db.Column(db.Text, nullable=False)
+    user_id   = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
