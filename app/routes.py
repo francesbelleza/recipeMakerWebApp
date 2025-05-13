@@ -8,7 +8,7 @@ from statistics import mean
 
 
 @app.route('/', methods=['GET','POST'])
-def home():
+def home('/'):
     form    = SearchForm()
     recipes = Recipe.query.order_by(Recipe.created.desc()).all()
 
@@ -203,8 +203,66 @@ def profile(user_id):
 @app.route('/recipe/<int:recipe_id>/save', methods=['POST'])
 @login_required
 def save_recipe(recipe_id):
-    flash("Save feature coming soon!", "info")
+    recipe = Recipe.query.get_or_404(recipe_id)
+    if recipe in current_user.saved_recipes:
+        flash('Recipe already saved.', 'info')
+    else:
+        current_user.saved_recipes.append(recipe)
+        db.session.commit()
+        flash('Recipe saved successfully!', 'success')
     return redirect(url_for('view_recipe', recipe_id=recipe_id))
+
+
+
+@app.route('/recipe/<int:recipe_id>/unsave', methods=['POST'])
+@login_required
+def unsave_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    if recipe in current_user.saved_recipes:
+        current_user.saved_recipes.remove(recipe)
+        db.session.commit()
+        flash('Recipe removed from saved list.', 'success')
+    else:
+        flash('Recipe not in your saved list.', 'info')
+    return redirect(url_for('view_recipe', recipe_id=recipe_id))
+
+
+
+@app.route('/saved_recipes')
+@login_required
+def saved_recipes():
+    return render_template('saved_recipes.html', recipes=current_user.saved_recipes)
+
+
+
+@app.route('/profile/edit', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    
+    if form.validate_on_submit():
+        if not check_password_hash(current_user.password, form.current_password.data):
+            flash('Current password is incorrect.', 'danger')
+            return redirect(url_for('edit_profile'))
+
+        current_user.display_name = form.display_name.data
+        current_user.email = form.email.data
+
+        if form.new_password.data:
+            current_user.password = generate_password_hash(form.new_password.data)
+
+        db.session.commit()
+        flash('Your profile has been updated!', 'success')
+        return redirect(url_for('profile'))  # Redirect to the profile view (if you have one)
+
+    return render_template('edit_profile.html', form=form)
+
+
+@app.route('/recipes')
+def all_recipes():
+    recipes = Recipe.query.order_by(Recipe.title.asc()).all()
+    return render_template('all_recipes.html', recipes=recipes)
+
 
 
 
